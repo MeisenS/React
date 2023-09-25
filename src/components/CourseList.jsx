@@ -1,26 +1,16 @@
 import React from "react";
+import "./CourseList.css";
+import Course from "./Course";
 
 const CourseList = (props) => {
   const courses = props.courses;
   return (
     <div>
-      <table>
-        <tbody>
-          {Object.entries(courses).map(([key, value]) => (
-            <tr>
-              <th>{value.term}
-              
-              {value.number}</th>
-              
-              
-              {value.meets}
-             
-              {value.title}
-              
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="product-list">
+        {Object.entries(courses).map(([key, value]) => (
+          <Course key={key} course={value} />
+        ))}
+      </div>
     </div>
   );
 };
