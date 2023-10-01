@@ -42,11 +42,17 @@ const Menu = ({ selection }) => <div className="card">{meals[selection]}</div>;
 const MenuPage = (props) => {
   const { data } = props;
   const [selection, setSelection] = useState(() => Object.keys(meals)[0]);
+  const [selectCard, setSelectCard] = useState([]);
+
+  const toggleSelected = (item) => setSelectCard(
+      selectCard.includes(item) ? selectCard.filter(x => x !== item) : [...selectCard, item]
+  )
+
   return (
     <div>
       <MenuSelector selection={selection} setSelection={setSelection} />
       
-      <CourseList courses={data.courses} selectedTerm={selection} />
+      <CourseList courses={data.courses} selectedTerm={selection} selected={selectCard} toggleSelected={toggleSelected} />
     </div>
   );
 };
