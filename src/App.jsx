@@ -1,8 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Banner from "./components/Banner";
-import CourseList from "./components/CourseList";
 import MenuPage from "./components/MenuPage";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import Navigation from './components/Navigation';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useJsonQuery } from "./utilities/fetch";
 
