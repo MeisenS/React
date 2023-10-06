@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import Schedule from "./Schedule";
-import Banner from "./Banner";
+import { courseConflicts } from "../utilities/conflict";
 import CourseList from "./CourseList";
 
 const meals = {
@@ -48,6 +48,9 @@ const MenuPage = (props) => {
   const [open, setOpen] = useState(false);
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
+  const cantSelect = (newClass) => {
+    return !courseConflicts(newClass, selectedCourses);
+  };
 
   const toggleSelected = (item) =>
     setSelectCard(
@@ -60,7 +63,13 @@ const MenuPage = (props) => {
     <div>
       <MenuSelector selection={selection} setSelection={setSelection} />
 
-      <button className="btn btn-outline-dark" style={{ float: 'right' }} onClick={openModal}>Course Plan</button>
+      <button
+        className="btn btn-outline-dark"
+        style={{ float: "right" }}
+        onClick={openModal}
+      >
+        Course Plan
+      </button>
 
       <Modal open={open} close={closeModal}>
         {selectCard.length == 0 ? (
@@ -68,8 +77,6 @@ const MenuPage = (props) => {
             <h5>You have not selected any course yet.</h5>
             <h5>Please click on any course card to select.</h5>
           </div>
-          
-          
         ) : (
           <Schedule selectedCourses={selectCard} />
         )}
@@ -80,6 +87,7 @@ const MenuPage = (props) => {
         selectedTerm={selection}
         selected={selectCard}
         toggleSelected={toggleSelected}
+        cantSelect={cantSelect}
       />
     </div>
   );

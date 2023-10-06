@@ -13,3 +13,9 @@
   background-color: lemonchiffon;
   color: green;
 }
+
+.noSelection {
+  background-color:rgb(112, 122, 122);
+  color: red;
+  cursor: not-allowed;
+}
