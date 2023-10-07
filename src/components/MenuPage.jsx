@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import Schedule from "./Schedule";
-import { courseConflicts } from "../utilities/conflict";
+import { useEffect } from 'react';
+import { courseConflict } from "../utilities/conflict";
 import CourseList from "./CourseList";
 
 const meals = {
@@ -48,9 +49,11 @@ const MenuPage = (props) => {
   const [open, setOpen] = useState(false);
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
-  const cantSelect = (newClass) => {
-    return !courseConflicts(newClass, selectedCourses);
-  };
+  const [noSelection, setNoSelection] = useState([]);
+    useEffect(() => {
+        const noSelectionList = Object.values(data.courses).filter(course1 => selectCard.some(course2 => courseConflict(course1, course2)));
+        setNoSelection(noSelectionList);
+    }, [selectCard]);
 
   const toggleSelected = (item) =>
     setSelectCard(
@@ -87,7 +90,7 @@ const MenuPage = (props) => {
         selectedTerm={selection}
         selected={selectCard}
         toggleSelected={toggleSelected}
-        cantSelect={cantSelect}
+        cantSelect={noSelection}
       />
     </div>
   );

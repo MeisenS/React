@@ -15,7 +15,7 @@
 }
 
 .noSelection {
-  background-color:rgb(112, 122, 122);
-  color: red;
+  background-color: red;
+  color: rgb(90, 21, 21);
   cursor: not-allowed;
 }
