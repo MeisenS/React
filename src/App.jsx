@@ -5,6 +5,7 @@ import MenuPage from "./components/MenuPage";
 //import Navigation from './components/Navigation';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useJsonQuery } from "./utilities/fetch";
+import Dispatcher from './components/Dispatcher';
 
 
 const Main = () => {
@@ -20,7 +21,8 @@ const Main = () => {
   return (
     <div>
       <Banner title={data.title}></Banner>
-      <MenuPage data = {data} />
+      {/* <MenuPage data = {data} /> */}
+      <Dispatcher data={ data } />
     </div>
   );
 };

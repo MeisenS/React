@@ -1,4 +1,6 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./Course.css";
+import { Link } from "react-router-dom";
 
 const Course = (props) => {
   const course = props.course;
@@ -7,14 +9,23 @@ const Course = (props) => {
   const cantSelect = props.cantSelect;
   return (
     <div className="card" onClick={() => toggleSelected(course)}>
-            <div className={`card-body ${selected.includes(course) ? 'selected' : ''} ${cantSelect.includes(course) ? 'noSelection' : ''}`} onClick={!cantSelect.includes(course) ?
-                                                                             () => toggleSelected(course) : null}>
-                <h3 className="card-title">{course.term} CS {course.number}</h3>
-                <p className="card-text">{course.title}</p>
-                <hr className="custom-divider"/> 
-                <p className="card-text">{course.meets}</p>
-            </div>
-        </div>
+      <div
+        className={`card-body ${selected.includes(course) ? "selected" : ""} ${
+          cantSelect.includes(course) ? "noSelection" : ""
+        }`}
+        onClick={
+          !cantSelect.includes(course) ? () => toggleSelected(course) : null
+        }
+      >
+        <h3 className="card-title">
+          {course.term} CS {course.number}
+        </h3>
+        <p className="card-text">{course.title}</p>
+        <hr className="custom-divider" />
+        <p className="card-text">{course.meets}</p>
+        <p><Link className="btn btn-primary" to={`/courses/${course.term[0]}${course.number}`}>Edit</Link></p>
+      </div>
+    </div>
   );
 };
 

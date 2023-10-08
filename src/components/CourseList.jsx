@@ -14,9 +14,10 @@ const CourseList = (props) => {
   return (
     <div>
       <div className="product-list">
-        {Object.entries(selectedCourses).map(([key, value]) => (
+        {Object.entries(selectedCourses).map(([key, value],index) => (
           <Course
-            key={key}
+            key={index}
+            courseId={key}
             course={value}
             selected={selected}
             toggleSelected={toggleSelected}
