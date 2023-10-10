@@ -12,7 +12,7 @@ const validateUserData = (key, val) => {
         val
       )
         ? ""
-        : "Must contain days (M,Tu,W,Th,F) and start-end (00:00-00:00), e.g., MWF 12:00-13:20";
+        : "Must contain days (M,Tu,W,Th,F) and start-end (00:00-00:00)";
   }
 };
 
