@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useFormData } from "../utilities/useFormData";
+import { DatabaseUpdate } from "../utilities/firebase";
 import "./CourseForm.css";
 
 const validateUserData = (key, val) => {
@@ -50,13 +51,10 @@ const ButtonBar = ({ message, disabled }) => {
         Cancel
       </button>
 
-      <button
-        type="button"
-        className="btn btn-outline-dark me-2"
-        onClick={() => navigate("/")}
-      >
+      <button type="submit" className="btn btn-primary me-auto">
         Submit
       </button>
+      
     </div>
   );
 };
@@ -68,13 +66,17 @@ const handleSubmit = (evt) => {
 const CourseForm = ({ course }) => {
   const { courseId } = useParams();
   const [state, change] = useFormData(validateUserData, courseId);
+  const [update, result] = DatabaseUpdate(`/courses/${courseId}`);
+  const submit = (evt) => {
+    evt.preventDefault();
+    if (!state.errors) {
+      update(state.values);
+      console.log(state);
+    }
+  };
 
   return (
-    <form
-      onSubmit={null}
-      noValidate
-      className={state.errors ? "was-validated" : null}
-    >
+    <form onSubmit={submit} noValidate className={state.errors ? 'was-validated' : null}>
       <InputField
         name="title"
         text="Title"
