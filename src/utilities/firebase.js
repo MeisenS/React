@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref, update} from 'firebase/database';
 import { useCallback, useEffect, useState } from 'react';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
     databaseURL: "https://project-38a8e-default-rtdb.firebaseio.com/",
@@ -25,6 +26,8 @@ export const DBData = (path) => {
   return [ data, error ];
 };
 
+
+
 const makeResult = (error) => {
   const timestamp = Date.now();
   const message = error?.message || `Updated: ${new Date(timestamp).toLocaleString()}`;
@@ -40,4 +43,22 @@ export const DatabaseUpdate = (path) => {
   }, [database, path]);
 
   return [updateData, result];
+};
+
+export const signInWithGoogle = () => {
+  signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
+};
+
+const firebaseSignOut = () => signOut(getAuth(firebase));
+
+export { firebaseSignOut as signOut };
+
+export const useAuthState = () => {
+  const [user, setUser] = useState();
+
+  useEffect(() => (
+    onAuthStateChanged(getAuth(firebase), setUser)
+  ), []);
+
+  return [user];
 };

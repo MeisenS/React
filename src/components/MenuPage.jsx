@@ -4,6 +4,7 @@ import Schedule from "./Schedule";
 import { useEffect } from "react";
 import { courseConflict } from "../utilities/conflict";
 import CourseList from "./CourseList";
+import Navigation from "./Navigation";
 
 const meals = {
   Fall: "Fall",
@@ -76,6 +77,7 @@ const MenuPage = (props) => {
         Course Plan
       </button>
 
+      {/* <Navigation /> */}
       <Modal open={open} close={closeModal}>
         {selectCard.length == 0 ? (
           <div>
