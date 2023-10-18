@@ -13,13 +13,15 @@ const CourseFormWrapper = ({ data }) => {
     return <CourseForm course={course} />;
   }
 
-const Dispatcher = ({data}) => (
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<MenuPage data={data}/>}></Route>
-            <Route path="/courses/:courseId" element={<CourseFormWrapper data={data} />} />
-        </Routes>
-    </BrowserRouter>
-);
+  const Dispatcher = ({data}) => {
 
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<TermPage data={data}/>}></Route>
+                <Route path="/courses/:courseId" element={<CourseFormWrapper data={data} />} />
+            </Routes>
+        </BrowserRouter>
+    )
+};
 export default Dispatcher;

@@ -3,6 +3,7 @@ import "./Course.css";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useProfile } from "../utilities/profile";
 
 const Course = (props) => {
   const course = props.course;
@@ -10,6 +11,11 @@ const Course = (props) => {
   const toggleSelected = props.toggleSelected;
   const cantSelect = props.cantSelect;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [profile, profileLoading, profileError] = useProfile();
+  // console.log(profile)
+  if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
+  if (profileLoading) return <h1>Loading user profile</h1>;
+  if (!profile) return <h1>No profile data</h1>;
 
   useEffect(() => {
     const auth = getAuth();
@@ -35,12 +41,15 @@ const Course = (props) => {
         <hr className="custom-divider" />
         <p className="card-text">{course.meets}</p>
         <p>
-          <Link
+          {isAuthenticated && profile?.isAdmin && (
+            <Link
             className="btn btn-primary"
             to={`/courses/${course.term[0]}${course.number}`}
           >
-            Edit
-          </Link>
+              Edit
+            </Link>
+          )}
+          
         </p>
       </div>
     </div>
