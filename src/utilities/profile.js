@@ -1,4 +1,4 @@
-import { useAuthState, useDbData } from "./firebase";
+import { useAuthState, DBData } from "./firebase";
 
 export const useProfile = () => {
   const [user] = useAuthState();
